@@ -53,7 +53,7 @@ let router = express.Router()
 router.route('/')
   .get((req, res) => {
     Todo.find().then(todos => {
-      res.render('../views/todo.njk', {todos: todos})
+      res.render('todo.njk', {todos: todos})
     }).catch(err => {
       console.error(err)
     })
