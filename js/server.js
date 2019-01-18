@@ -2,7 +2,7 @@ const path = require('path') // gestion fichiers locaux
 const express = require('express') //framework mvc
 const nunjucks = require('nunjucks') // templates
 const session = require('express-session') // sessions
-const bodyParser = require('body-parser') 
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 const config = require(path.join(__dirname, 'config.js'))
@@ -53,7 +53,7 @@ let router = express.Router()
 router.route('/')
   .get((req, res) => {
     Todo.find().then(todos => {
-      res.render('todo.njk', {todos: todos})
+      res.render('../views/todo.njk', {todos: todos})
     }).catch(err => {
       console.error(err)
     })
