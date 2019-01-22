@@ -7,17 +7,18 @@ const mongoose = require('mongoose')
 
 const config = require(path.join(__dirname, 'config.js'))
 
-const TodoSchema = new mongoose.Schema({
-  label: { type: String, required: true },
-  dateBegin: { type: String },
-  dateEnd: { type: String },
-  priority: { type: Number, default: 5 }
+const FilmSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  releasedate: { type: String },
+  realisator: { type: String },
+  gender: { type: String },
+  description: { type: String },
 })
 
 mongoose.set('useFindAndModify', false);
 mongoose.set('useNewUrlParser', true)
 
-const Todo = mongoose.model('Todo', TodoSchema)
+const Film = mongoose.model('Film', FilmSchema)
 
 mongoose.connect('mongodb://' + config.mongodb.host + '/' + config.mongodb.db)
 mongoose.connection.on('error', err => {
@@ -52,8 +53,8 @@ let router = express.Router()
 
 router.route('/')
   .get((req, res) => {
-    Todo.find().then(todos => {
-      res.render('todo.njk', {todos: todos})
+    Film.find().then(films => {
+      res.render('film.njk', {films: films})
     }).catch(err => {
       console.error(err)
     })
@@ -61,14 +62,15 @@ router.route('/')
 
 router.route('/add')
   .post((req, res) => {
-    new Todo({
-      label: req.body.inputLabel,
-      dateBegin: req.body.inputDateBegin,
-      dateEnd: req.body.inputDateEnd,
-      priority: req.body.inputPriority
-    }).save().then(todo => {
+    new Film({
+      title: req.body.inputtitle,
+      releasedate: req.body.inputDateBegin,
+      realisator: req.body.inputreal,
+      gender: req.body.inputgender,
+      description: req.body.inputdesc
+    }).save().then(film => {
        console.log('Votre tâche a été ajoutée');
-      res.redirect('/todo')
+      res.redirect('/film')
     }).catch(err => {
       console.warn(err);
     })
@@ -78,19 +80,19 @@ router.route('/add')
 
 router.route('/delete/:id')
   .get((req, res) => {
-    Todo.findByIdAndRemove({_id: req.params.id}).then(() => {
+    Film.findByIdAndRemove({_id: req.params.id}).then(() => {
       console.log('Votre tâche est finie');
-      res.redirect('/todo')
+      res.redirect('/film')
     }).catch(err => {
       console.error(err)
     })
   })
 
 
-app.use('/todo', router)
+app.use('/film', router)
 app.use('/pub', express.static('public'))
 app.use((req, res) => {
-  res.redirect('/todo')
+  res.redirect('/film')
 })
 
 app.listen(config.express.port, config.express.ip, () => {

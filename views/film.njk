@@ -1,0 +1,102 @@
+{% extends "base.njk" %}
+
+{% block content %}
+  <div class="col-md-10 offset-md-1">
+
+    <div class="card card-outline-primary mb-3 text-center">
+      <div class="card-block">
+        <blockquote class="card-blockquote">
+          <center>
+            <table id="Filmlist" class="table table-bordered table-hover sortable">
+              <thead>
+                <tr>
+                  <th>Titre</th>
+                  <th>Date de Sortie</th>
+                  <th>Réalisateur</th>
+                  <th>Genre</th>
+                  <th>Description</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for film in films %}
+                  <tr>
+                    <td>
+                      {{ film.title }}
+                    </td>
+                    <td>
+                      {{ film.releasedate }}
+                    </td>
+                    <td>
+                      {{ film.realisator }}
+                    </td>
+                    <td>
+                      {{ film.gender }}
+                    </td>
+                    <td>
+                      {{ film.description }}
+                    </td>
+                    <td>
+                      <a class="btn btn-success btn-sm" href="/film/edit/{{ film._id }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                      <a class="btn btn-danger btn-sm" href="/film/delete/{{ film._id }}" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a class="btn btn-warning btn-sm" href="/film/delete/{{ film._id }}" role="button"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+            <br>
+
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAddFilm">
+              Ajouter un film
+            </button>
+           <br>
+          </center>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalAddFilm" tabindex="-1" role="dialog" aria-labelledby="modalAddFilm" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAddFilm">Ajouter une tâche</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/film/add/" method="post">
+            <div class="form-group">
+              <label for="inputLabel">Titre :</label>
+              <input type="text" class="form-control" id="inputtitle" name="inputtitle" placeholder="La menace fantôme" autofocus required>
+            </div>
+            <div class="form-group">
+              <label for="inputDateBegin" class="">Début de sortie:</label>
+              <input class="form-control" type="text" id="inputDateBegin" name="inputDateBegin" placeholder="01/01/2019" required>
+            </div>
+            <div class="form-group">
+              <label for="inputDateEnd" class="">Réalisateur :</label>
+              <input type="text" class="form-control" id="inputreal" name="inputreal" placeholder="George Lucas" autofocus required>
+            </div>
+            <div class="form-group">
+              <label for="inputDateEnd" class="">Genre :</label>
+              <input type="text" class="form-control" id="inputgender" name="inputgender" placeholder="Aventure" autofocus required>
+            </div>
+            <div class="form-group">
+              <label for="inputDateEnd" class="">Description :</label>
+              <input type="textarea" class="form-control" id="inputdesc" name="inputdesc" placeholder="le jeune skywalker ..." autofocus required>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+          <button type="submit" class="btn btn-success">Ajout</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
