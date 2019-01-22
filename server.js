@@ -60,6 +60,24 @@ router.route('/')
     })
   })
 
+  router.route('/fiche/:id')
+    .get((req, res) => {
+      Film.find().then(films => {
+        res.render('fiche.njk', {_id : req.params.id})
+      }).catch(err => {
+        console.error(err)
+      })
+    })
+
+    router.route('/cine')
+      .get((req, res) => {
+        Film.find().then(films => {
+          res.render('cine.njk', {films: films})
+        }).catch(err => {
+          console.error(err)
+        })
+      })
+
 router.route('/add')
   .post((req, res) => {
     new Film({
