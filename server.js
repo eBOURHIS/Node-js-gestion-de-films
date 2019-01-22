@@ -8,11 +8,20 @@ const passport = require('passport')
 
 const config = require(path.join(__dirname, 'config.js'))
 
+<<<<<<< HEAD
+const FilmSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  releasedate: { type: String },
+  realisator: { type: String },
+  gender: { type: String },
+  description: { type: String },
+=======
 const filmSchema = new mongoose.Schema({
   label: { type: String, required: true },
   dateBegin: { type: String },
   dateEnd: { type: String },
   priority: { type: Number, default: 5 }
+>>>>>>> 0a15e50184293e15edbfa49cba08196f4a3bec75
 })
 
 const Schema = mongoose.Schema;
@@ -24,8 +33,12 @@ const UserDetail = new Schema({
 mongoose.set('useFindAndModify', false);
 mongoose.set('useNewUrlParser', true)
 
+<<<<<<< HEAD
+const Film = mongoose.model('Film', FilmSchema)
+=======
 const film = mongoose.model('film', filmSchema)
 const UserDetails = mongoose.model('userInfo', UserDetail, 'userInfo');
+>>>>>>> 0a15e50184293e15edbfa49cba08196f4a3bec75
 
 mongoose.connect('mongodb://' + config.mongodb.host + '/' + config.mongodb.db)
 mongoose.connection.on('error', err => {
@@ -110,15 +123,47 @@ let router = express.Router()
 
 router.route('/films')
   .get((req, res) => {
+<<<<<<< HEAD
+    Film.find().then(films => {
+=======
     film.find().then(films => {
+>>>>>>> 0a15e50184293e15edbfa49cba08196f4a3bec75
       res.render('film.njk', {films: films})
     }).catch(err => {
       console.error(err)
     })
   })
 
+  router.route('/fiche/:id')
+    .get((req, res) => {
+      Film.find().then(films => {
+        res.render('fiche.njk', {_id : req.params.id})
+      }).catch(err => {
+        console.error(err)
+      })
+    })
+
+    router.route('/cine')
+      .get((req, res) => {
+        Film.find().then(films => {
+          res.render('cine.njk', {films: films})
+        }).catch(err => {
+          console.error(err)
+        })
+      })
+
 router.route('/add')
   .post((req, res) => {
+<<<<<<< HEAD
+    new Film({
+      title: req.body.inputtitle,
+      releasedate: req.body.inputDateBegin,
+      realisator: req.body.inputreal,
+      gender: req.body.inputgender,
+      description: req.body.inputdesc
+    }).save().then(film => {
+       console.log('Votre tâche a été ajoutée');
+=======
     new film({
       label: req.body.inputLabel,
       dateBegin: req.body.inputDateBegin,
@@ -126,6 +171,7 @@ router.route('/add')
       priority: req.body.inputPriority
     }).save().then(film => {
        console.log('Votre tâche a été ajoutée' + req);
+>>>>>>> 0a15e50184293e15edbfa49cba08196f4a3bec75
       res.redirect('/film')
     }).catch(err => {
       console.warn(err);
@@ -134,7 +180,11 @@ router.route('/add')
 
 router.route('/delete/:id')
   .get((req, res) => {
+<<<<<<< HEAD
+    Film.findByIdAndRemove({_id: req.params.id}).then(() => {
+=======
     film.findByIdAndRemove({_id: req.params.id}).then(() => {
+>>>>>>> 0a15e50184293e15edbfa49cba08196f4a3bec75
       console.log('Votre tâche est finie');
       res.redirect('/film')
     }).catch(err => {

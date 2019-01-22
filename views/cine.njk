@@ -1,0 +1,19 @@
+{% extends "base.njk" %}
+
+{% block content %}
+  <div class="col-md-10 offset-md-1">
+
+    <div class="card card-outline-primary mb-3 text-center">
+      <div class="card-block">
+        <div id="display" class="col-md-9">
+            <div id="root"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.5.10/prop-types.min.js'></script>
+  <script src="../js/searchfilm.js"></script>
+{% endblock %}
