@@ -7,39 +7,31 @@
       <div class="card-block">
         <blockquote class="card-blockquote">
           <center>
-            <table id="Filmlist" class="table table-bordered table-hover sortable">
+            <table id="todolist" class="table table-bordered table-hover sortable">
               <thead>
                 <tr>
-                  <th>Titre</th>
-                  <th>Date de Sortie</th>
-                  <th>Réalisateur</th>
-                  <th>Genre</th>
-                  <th>Description</th>
+                  <th>Tâche</th>
+                  <th>Date de début</th>
+                  <th>Date de fin</th>
+                  <th>Priorité</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {% for film in films %}
+                {% for todo in todos %}
                   <tr>
                     <td>
-                      {{ film.title }}
+                      {{ todo.label }}
                     </td>
                     <td>
-                      {{ film.releasedate }}
+                      {{ todo.dateBegin }}
                     </td>
                     <td>
-                      {{ film.realisator }}
+                      {{ todo.dateEnd }}
                     </td>
                     <td>
-                      {{ film.gender }}
-                    </td>
-                    <td>
-                      {{ film.description }}
-                    </td>
-                    <td>
-                      <a class="btn btn-success btn-sm" href="/film/edit/{{ film._id }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                      <a class="btn btn-danger btn-sm" href="/film/delete/{{ film._id }}" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                        <a class="btn btn-warning btn-sm" href="/film/delete/{{ film._id }}" role="button"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                      <a class="btn btn-warning btn-sm" href="/todo/edit/{{ todo._id }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                      <a class="btn btn-success btn-sm" href="/todo/delete/{{ todo._id }}" role="button"><i class="fa fa-check" aria-hidden="true"></i></a>
                     </td>
                   </tr>
                 {% endfor %}
@@ -48,46 +40,42 @@
 
             <br>
 
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAddFilm">
-              Ajouter un film
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAddTodo">
+              Ajouter une tâche
             </button>
            <br>
+
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalRemoveAllTodo">
+              Supprimer toutes les tâches
+            </button>
           </center>
         </blockquote>
       </div>
     </div>
   </div>
 
-  <div class="modal fade" id="modalAddFilm" tabindex="-1" role="dialog" aria-labelledby="modalAddFilm" aria-hidden="true">
+  <div class="modal fade" id="modalAddTodo" tabindex="-1" role="dialog" aria-labelledby="modalAddTodo" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalAddFilm">Ajouter une tâche</h5>
+          <h5 class="modal-title" id="modalAddTodo">Ajouter une tâche</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form action="/film/add/" method="post">
+          <form action="/todo/add/" method="post">
             <div class="form-group">
-              <label for="inputLabel">Titre :</label>
-              <input type="text" class="form-control" id="inputtitle" name="inputtitle" placeholder="La menace fantôme" autofocus required>
+              <label for="inputLabel">Nom de la nouvelle tâche :</label>
+              <input type="text" class="form-control" id="inputLabel" name="inputLabel" placeholder="Aller chercher du pain" autofocus required>
             </div>
             <div class="form-group">
-              <label for="inputDateBegin" class="">Début de sortie:</label>
+              <label for="inputDateBegin" class="">Début de la tâche :</label>
               <input class="form-control" type="text" id="inputDateBegin" name="inputDateBegin" placeholder="01/01/2019" required>
             </div>
             <div class="form-group">
-              <label for="inputDateEnd" class="">Réalisateur :</label>
-              <input type="text" class="form-control" id="inputreal" name="inputreal" placeholder="George Lucas" autofocus required>
-            </div>
-            <div class="form-group">
-              <label for="inputDateEnd" class="">Genre :</label>
-              <input type="text" class="form-control" id="inputgender" name="inputgender" placeholder="Aventure" autofocus required>
-            </div>
-            <div class="form-group">
-              <label for="inputDateEnd" class="">Description :</label>
-              <input type="textarea" class="form-control" id="inputdesc" name="inputdesc" placeholder="le jeune skywalker ..." autofocus required>
+              <label for="inputDateEnd" class="">Fin de la tâche :</label>
+              <input class="form-control" type="text" id="inputDateEnd" name="inputDateEnd" placeholder="02/01/2019">
             </div>
         </div>
         <div class="modal-footer">
@@ -99,4 +87,22 @@
     </div>
   </div>
 
+  <div class="modal fade" id="modalRemoveAllTodo" tabindex="-1" role="dialog" aria-labelledby="modalRemoveAllTodo" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRemoveAllTodo">Supprimer toutes les tâches ?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <center>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Non</button>
+                <a class="btn btn-danger" href="/todo/delete/all" role="button">Oui</a>
+            </center>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
