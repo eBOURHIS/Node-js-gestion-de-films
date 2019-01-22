@@ -2,7 +2,7 @@ const path = require('path') // gestion fichiers locaux
 const express = require('express') //framework mvc
 const nunjucks = require('nunjucks') // templates
 const session = require('express-session') // sessions
-const bodyParser = require('body-parser') 
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 const config = require(path.join(__dirname, 'config.js'))
