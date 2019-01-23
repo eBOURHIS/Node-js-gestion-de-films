@@ -108,7 +108,7 @@ app.use((req, res, next) => {
 
 let router = express.Router()
 
-router.route('/films')
+router.route('/film')
   .get((req, res) => {
     Film.find().then(films => {
       res.render('film.njk', {films: films})
@@ -161,7 +161,7 @@ router.route('/delete/:id')
     })
   })
 
-app.use('/film', router)
+app.use('/', router)
 app.use('/pub', express.static('public'))
 app.use((req, res) => {
   res.redirect('/film')
