@@ -1,0 +1,75 @@
+{% extends "base.njk" %}
+
+{% block content %}
+  <div class="col-md-10 offset-md-1">
+
+    <div class="card card-outline-primary mb-3 text-center">
+      <div class="card-block">
+        <blockquote class="card-blockquote">
+          <center>
+            <table id="userlist" class="table table-bordered table-hover sortable">
+              <thead>
+                <tr>
+                  <th>Nom de l'utilisateur</th>
+                  <th>Mot de passe</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in user %}
+                  <tr>
+                    <td>
+                      {{ user.username }}
+                    </td>
+                    <td>
+                      {{ user.password }}
+                    </td>
+                    <td>
+                      <a class="btn btn-warning btn-sm" href="/user/edit/{{ user._id }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                      <a class="btn btn-danger btn-sm" href="/user/delete/{{ user._id }}" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+            <br>
+
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAddUser">
+              Ajouter un utilisateur
+            </button>
+           <br>
+          </center>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog" aria-labelledby="modalAddUser" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAddUser">Ajouter un utilisateur</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/user/add/" method="post">
+            <div class="form-group">
+              <label for="inputLabel">Login</label>
+              <input type="text" class="form-control" id="inputLogin" name="inputLogin" placeholder="Jean" autofocus required>
+            </div>
+            <div class="form-group">
+              <label for="inputDateBegin" class="">Mot de passe</label>
+              <input class="form-control" type="text" id="inputDateBegin" name="inputPassword" placeholder="Mot de passe" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+          <button type="submit" class="btn btn-success">Ajout</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

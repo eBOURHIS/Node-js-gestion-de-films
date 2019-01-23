@@ -26,7 +26,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useNewUrlParser', true)
 
 const Film = mongoose.model('film', FilmSchema)
-const UserDetails = mongoose.model('userInfo', UserDetail, 'userInfo');
+const User = mongoose.model('userInfo', UserDetail, 'userInfo');
 
 mongoose.connect('mongodb://' + config.mongodb.host + '/' + config.mongodb.db)
 mongoose.connection.on('error', err => {
@@ -39,7 +39,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-      UserDetails.findOne({
+      User.findOne({
         username: username
       }, function(err, user) {
         if (err) {
@@ -64,8 +64,8 @@ nunjucks.configure('views', {
   express: app
 })
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 //Passport JS
 app.get('/', (req, res) => res.render('auth.njk', { root : __dirname}));
@@ -108,7 +108,7 @@ app.use((req, res, next) => {
 
 let router = express.Router()
 
-router.route('/films')
+router.route('/film')
   .get((req, res) => {
     Film.find().then(films => {
       res.render('film.njk', {films: films})
@@ -161,7 +161,39 @@ router.route('/delete/:id')
     })
   })
 
-app.use('/film', router)
+router.route('/user')
+  .get((req, res) => {
+    User.find().then(user => {
+      res.render('user.njk', {user: user})
+    }).catch(err => {
+      console.error(err)
+    })
+  })
+
+  router.route('/user/add')
+  .post((req, res) => {
+    new User({
+      username: req.body.inputLogin,
+      password: req.body.inputPassword
+    }).save().then(film => {
+       console.log('Votre utilisateur a été ajouté');
+      res.redirect('/user')
+    }).catch(err => {
+      console.warn(err);
+    })
+  })
+
+router.route('/user/delete/:id')
+  .get((req, res) => {
+    User.findByIdAndRemove({_id: req.params.id}).then(() => {
+      console.log('L\'utilisateur a été supprimé');
+      res.redirect('/user')
+    }).catch(err => {
+      console.error(err)
+    })
+  })
+
+app.use('/', router)
 app.use('/pub', express.static('public'))
 app.use((req, res) => {
   res.redirect('/film')
