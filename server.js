@@ -151,6 +151,15 @@ router.route('/add')
     })
   })
 
+  router.route('/update')
+    .get((req,res) => {
+      Film.findById({_id: req.params.id}).then(film => {
+        res.render('film.njk', {film: film});
+      }).catch(err => {
+        console.warn(err);
+      })
+    })
+
 router.route('/delete/:id')
   .get((req, res) => {
     Film.findByIdAndRemove({_id: req.params.id}).then(() => {

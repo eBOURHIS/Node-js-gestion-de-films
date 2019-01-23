@@ -43,6 +43,9 @@
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAddTodo">
               Ajouter une tâche
             </button>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalUpdateTodo">
+              Modifier une tâche
+            </button>
            <br>
 
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalRemoveAllTodo">
@@ -76,6 +79,39 @@
             <div class="form-group">
               <label for="inputDateEnd" class="">Fin de la tâche :</label>
               <input class="form-control" type="text" id="inputDateEnd" name="inputDateEnd" placeholder="02/01/2019">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+          <button type="submit" class="btn btn-success">Ajout</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalUpdateTodo" tabindex="-1" role="dialog" aria-labelledby="modalUpdateTodo" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalUodateTodo">Modifier un film</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/todo/add/" method="post">
+            <div class="form-group">
+              <label for="inputLabel">Nom du film :</label>
+              <input type="text" class="form-control" id="inputLabel" name="inputLabel" placeholder="{{ title }}" autofocus required>
+            </div>
+            <div class="form-group">
+              <label for="inputDateBegin" class="">Date de réalisation :</label>
+              <input class="form-control" type="text" id="inputDateBegin" name="inputDateBegin" placeholder="{{ releaseDate }}" required>
+            </div>
+            <div class="form-group">
+              <label for="inputText" class="">Synopsis :</label>
+              <input class="form-control" type="text" id="inputText" name="inputText" placeholder="{{ description }}">
             </div>
         </div>
         <div class="modal-footer">
