@@ -144,7 +144,7 @@ router.route('/add')
       gender: req.body.inputgender,
       description: req.body.inputdesc
     }).save().then(film => {
-       console.log('Votre tâche a été ajoutée');
+       console.log('Votre film a été ajoutée');
       res.redirect('/film')
     }).catch(err => {
       console.warn(err);
@@ -163,7 +163,7 @@ router.route('/add')
 router.route('/delete/:id')
   .get((req, res) => {
     Film.findByIdAndRemove({_id: req.params.id}).then(() => {
-      console.log('Votre tâche est finie');
+      console.log('Votre film est supprimé');
       res.redirect('/film')
     }).catch(err => {
       console.error(err)
