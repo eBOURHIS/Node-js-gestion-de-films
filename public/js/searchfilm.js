@@ -26,7 +26,7 @@ var Movie = function Movie(props)
   return React.createElement("div", { className: "card h-100" },
   React.createElement("img", { src: "https://image.tmdb.org/t/p/w185" + props.poster_path, className: "card-img-top" }),
   React.createElement("h4", { className: "card-body" },
-  React.createElement("a", { className: "card-title", href: "FicheFilm.php?id="+props.id}, props.title)),
+  React.createElement("a", { className: "card-title", href: "fiche/"+props.id}, props.title)),
   React.createElement("small", { className: "card-footer" }, grade));
 
 

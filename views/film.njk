@@ -2,143 +2,93 @@
 
 {% block content %}
   <div class="col-md-10 offset-md-1">
-
     <div class="card card-outline-primary mb-3 text-center">
-      <div class="card-block">
+    <h2>Liste des films enregistrés</h2>
+    <div class="card-block">
         <blockquote class="card-blockquote">
           <center>
-            <table id="todolist" class="table table-bordered table-hover sortable">
+            <table id="Filmlist" class="table table-bordered table-hover sortable">
               <thead>
                 <tr>
-                  <th>Tâche</th>
-                  <th>Date de début</th>
-                  <th>Date de fin</th>
-                  <th>Priorité</th>
+                  <th>Titre</th>
+                  <th>Date de Sortie</th>
+                  <th>Réalisateur</th>
+                  <th>Genre</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {% for todo in todos %}
+                {% for film in films %}
                   <tr>
                     <td>
-                      {{ todo.label }}
+                      {{ film.title }}
                     </td>
                     <td>
-                      {{ todo.dateBegin }}
+                      {{ film.releasedate }}
                     </td>
                     <td>
-                      {{ todo.dateEnd }}
+                      {{ film.realisator }}
                     </td>
                     <td>
-                      <a class="btn btn-warning btn-sm" href="/todo/edit/{{ todo._id }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                      <a class="btn btn-success btn-sm" href="/todo/delete/{{ todo._id }}" role="button"><i class="fa fa-check" aria-hidden="true"></i></a>
+                      {{ film.gender }}
+                    </td>
+                    <td>
+                      <a class="btn btn-success btn-sm" href="/edit/{{ film._id }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                      <a class="btn btn-danger btn-sm" href="/delete/{{ film._id }}" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                      <a class="btn btn-warning btn-sm" href="/delete/{{ film._id }}" role="button"><i class="fa fa-star-o" aria-hidden="true"></i></a>
                     </td>
                   </tr>
                 {% endfor %}
-              </tbody>
-            </table>
 
-            <br>
-
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAddTodo">
-              Ajouter une tâche
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAddFilm">
+              Ajouter un film
             </button>
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalUpdateTodo">
               Modifier une tâche
             </button>
            <br>
-
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalRemoveAllTodo">
-              Supprimer toutes les tâches
-            </button>
           </center>
         </blockquote>
       </div>
     </div>
-  </div>
-
-  <div class="modal fade" id="modalAddTodo" tabindex="-1" role="dialog" aria-labelledby="modalAddTodo" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalAddTodo">Ajouter une tâche</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="/todo/add/" method="post">
-            <div class="form-group">
-              <label for="inputLabel">Nom de la nouvelle tâche :</label>
-              <input type="text" class="form-control" id="inputLabel" name="inputLabel" placeholder="Aller chercher du pain" autofocus required>
-            </div>
-            <div class="form-group">
-              <label for="inputDateBegin" class="">Début de la tâche :</label>
-              <input class="form-control" type="text" id="inputDateBegin" name="inputDateBegin" placeholder="01/01/2019" required>
-            </div>
-            <div class="form-group">
-              <label for="inputDateEnd" class="">Fin de la tâche :</label>
-              <input class="form-control" type="text" id="inputDateEnd" name="inputDateEnd" placeholder="02/01/2019">
-            </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
-          <button type="submit" class="btn btn-success">Ajout</button>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <div class="modal fade" id="modalUpdateTodo" tabindex="-1" role="dialog" aria-labelledby="modalUpdateTodo" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalUodateTodo">Modifier un film</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="/todo/add/" method="post">
-            <div class="form-group">
-              <label for="inputLabel">Nom du film :</label>
-              <input type="text" class="form-control" id="inputLabel" name="inputLabel" placeholder="{{ title }}" autofocus required>
+      <div class="modal fade" id="modalAddFilm" tabindex="-1" role="dialog" aria-labelledby="modalAddFilm" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalAddFilm">Ajouter un film</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div class="form-group">
-              <label for="inputDateBegin" class="">Date de réalisation :</label>
-              <input class="form-control" type="text" id="inputDateBegin" name="inputDateBegin" placeholder="{{ releaseDate }}" required>
+            <div class="modal-body">
+              <form action="/add/" method="post">
+                <div class="form-group">
+                  <label for="inputLabel">Titre :</label>
+                  <input type="text" class="form-control" id="inputtitle" name="inputtitle" placeholder="La menace fantôme" autofocus required>
+                </div>
+                <div class="form-group">
+                  <label for="inputDateBegin" class="">Début de sortie:</label>
+                  <input class="form-control" type="text" id="inputDateBegin" name="inputDateBegin" placeholder="01/01/2019" required>
+                </div>
+                <div class="form-group">
+                  <label for="inputDateEnd" class="">Réalisateur :</label>
+                  <input type="text" class="form-control" id="inputreal" name="inputreal" placeholder="George Lucas" autofocus required>
+                </div>
+                <div class="form-group">
+                  <label for="inputDateEnd" class="">Genre :</label>
+                  <input type="text" class="form-control" id="inputgender" name="inputgender" placeholder="Aventure" autofocus required>
+                </div>
+                <div class="form-group">
+                  <label for="inputDateEnd" class="">Description :</label>
+                  <input type="textarea" class="form-control" id="inputdesc" name="inputdesc" placeholder="le jeune skywalker ..." autofocus required>
+                </div>
             </div>
-            <div class="form-group">
-              <label for="inputText" class="">Synopsis :</label>
-              <input class="form-control" type="text" id="inputText" name="inputText" placeholder="{{ description }}">
-            </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
-          <button type="submit" class="btn btn-success">Ajout</button>
-          </form>
-        </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-success">Ajout</button>
+            </form>
+          </div>
       </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modalRemoveAllTodo" tabindex="-1" role="dialog" aria-labelledby="modalRemoveAllTodo" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalRemoveAllTodo">Supprimer toutes les tâches ?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <center>
-                <button type="button" class="btn btn-success" data-dismiss="modal">Non</button>
-                <a class="btn btn-danger" href="/todo/delete/all" role="button">Oui</a>
-            </center>
-        </div>
-      </div>
-    </div>
-  </div>
 {% endblock %}
