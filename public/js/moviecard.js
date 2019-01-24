@@ -51,7 +51,7 @@ function AfficheFilm(id){
       for(var i = 0; i<obj.genres.length; i++)
       {
         document.getElementById('gender').innerHTML += obj.genres[i].name+", ";
-        //document.getElementById('Genre').value += obj.genres[i].id+", ";
+        document.getElementById('inputgender').value += obj.genres[i].name+", ";
       }
 
       document.getElementById('description').innerHTML = obj.overview;
@@ -60,10 +60,10 @@ function AfficheFilm(id){
 
 
       //document.getElementById("idTMDB").value = obj.id;
-      //document.getElementById("Titre").value = obj.title;
+      document.getElementById("inputtitle").value = obj.title;
       //document.getElementById("Image").value = img;
-      //document.getElementById("DateParution").value = obj.release_date;
-      //document.getElementById("Description").value = obj.overview;
+      document.getElementById("inputDateBegin").value = obj.release_date;
+      document.getElementById("inputdesc").value = obj.overview;
       //document.getElementById("Duree").value = document.getElementById('duration').innerHTML;
 
 
@@ -91,9 +91,9 @@ function getCred(id){
           document.getElementById('director').innerHTML += " "+obj.crew[i].name+",";
         }
 
-        document.getElementById("Realisateur").value = document.getElementById('director').innerHTML;
-        document.getElementById("Producteur").value = document.getElementById('producer').innerHTML;
-        document.getElementById("Acteur").value = document.getElementById('actor').innerHTML;
+        document.getElementById("inputreal").value = document.getElementById('director').innerHTML;
+        //document.getElementById("Producteur").value = document.getElementById('producer').innerHTML;
+        //document.getElementById("Acteur").value = document.getElementById('actor').innerHTML;
 
 
       }
