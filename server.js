@@ -211,7 +211,7 @@ router.route('/user')
   })
 
 router.route('/user/add')
-  .post(checkAuthentication, (req, res) => {
+  .post((req, res) => {
     new User({
       username: req.body.inputLogin,
       email: req.body.inputEmail,
