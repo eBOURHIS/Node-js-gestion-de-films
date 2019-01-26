@@ -1,0 +1,17 @@
+{% extends "base.njk" %}
+
+{% block content %}
+
+ <form action="/user/validerModif/{{id}}" method="post">
+                <div class="form-group">
+                  <label for="username">Titre :</label>
+                  <input type="text" class="form-control" id="username" name="username" placeholder="Login" value="{{username}}" autofocus required>
+                   <label for="email">Titre :</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{email}}" required>
+                </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-success">Modifier</button>
+            </form>
+
+{% endblock %}

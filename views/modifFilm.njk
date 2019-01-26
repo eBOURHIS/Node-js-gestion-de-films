@@ -1,0 +1,32 @@
+{% extends "base.njk" %}
+
+{% block content %}
+
+ <form action="/film/validerModif/{{id}}" method="post">
+                <div class="form-group">
+                  <label for="title">Titre :</label>
+                  <input type="text" class="form-control" id="inputTitle" name="title" placeholder="La menace fantôme" value="{{title}}" autofocus required>
+                </div>
+                <div class="form-group">
+                  <label for="releasedate" class="">Date de sortie:</label>
+                  <input class="form-control" type="text" id="inputReleaseDate" name="releasedate" placeholder="01/01/2019" value="{{releasedate.split('-').join('/')}}" required>
+                </div>
+                <div class="form-group">
+                  <label for="realisator" class="">Réalisateur :</label>
+                  <input type="text" class="form-control" id="inputRealisator" name="realisator" placeholder="George Lucas" value="{{realisator}}"autofocus required>
+                </div>
+                <div class="form-group">
+                  <label for="gender" class="">Genre :</label>
+                  <input type="text" class="form-control" id="inputGender" name="gender" placeholder="Aventure" value="{{gender}}" autofocus required>
+                </div>
+                <div class="form-group">
+                  <label for="description" class="">Description :</label>
+                  <textarea class="form-control" id="inputDescription" name="description" rows="5" cols="33" autofocus required>{{description}}</textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-success">Modifier</button>
+            </form>
+
+{% endblock %}

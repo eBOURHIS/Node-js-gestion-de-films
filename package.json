@@ -1,9 +1,12 @@
 {
   "name": "todolist",
   "version": "1.0.0",
-  "description": "Todo list avec express et templates pug",
-  "main": "app.js",
+  "description": "Gestion de films avec nodeJs Mongodb et Nunjucks",
+  "main": "server.js",
   "scripts": {
+    "start": "nodemon -e js,njk server.js",
+    "eslint-init": "eslint --init",
+    "eslint": "eslint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -14,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
     "cookie-session": "^2.0.0-beta.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
@@ -23,5 +27,14 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "nodemon": "^1.18.9"
   }
 }

@@ -3,7 +3,7 @@
 {% block content %}
   <div class="col-md-10 offset-md-1">
     <div class="card card-outline-primary mb-3 text-center">
-    <h2>Liste des films enregistrés</h2>
+    <h2>Mes films à voir</h2>
     <div class="card-block">
         <blockquote class="card-blockquote">
           <center>
@@ -33,9 +33,8 @@
                       {{ film.gender }}
                     </td>
                     <td>
-                      <a class="btn btn-success btn-sm" href="/edit/{{ film._id }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                      <a class="btn btn-danger btn-sm" href="/delete/{{ film._id }}" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                      <a class="btn btn-warning btn-sm" href="/delete/{{ film._id }}" role="button"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                      <a class="btn btn-success btn-sm" href="/film/edit/{{ film._id }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                      <a class="btn btn-danger btn-sm" href="/film/delete/{{ film._id }}" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </td>
                   </tr>
                 {% endfor %}
@@ -61,7 +60,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="/add/" method="post">
+              <form action="/film/add/" method="post">
                 <div class="form-group">
                   <label for="inputLabel">Titre :</label>
                   <input type="text" class="form-control" id="inputtitle" name="inputtitle" placeholder="La menace fantôme" autofocus required>

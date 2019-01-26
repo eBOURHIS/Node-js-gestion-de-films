@@ -10,8 +10,10 @@
             <table id="userlist" class="table table-bordered table-hover sortable">
               <thead>
                 <tr>
-                  <th>Nom de l'utilisateur</th>
+                  <th>Login</th>
+                  <th>Email</th>
                   <th>Mot de passe</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -21,7 +23,10 @@
                       {{ user.username }}
                     </td>
                     <td>
-                      {{ user.password }}
+                      {{ user.email }}
+                    </td>
+                     <td>
+                      ********
                     </td>
                     <td>
                       <a class="btn btn-warning btn-sm" href="/user/edit/{{ user._id }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
@@ -56,12 +61,16 @@
         <div class="modal-body">
           <form action="/user/add/" method="post">
             <div class="form-group">
-              <label for="inputLabel">Login</label>
+              <label for="inputLogin">Login</label>
               <input type="text" class="form-control" id="inputLogin" name="inputLogin" placeholder="Jean" autofocus required>
             </div>
+             <div class="form-group">
+              <label for="inputLogin">Email</label>
+              <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="you@example.com" autofocus required>
+            </div>
             <div class="form-group">
-              <label for="inputDateBegin" class="">Mot de passe</label>
-              <input class="form-control" type="text" id="inputDateBegin" name="inputPassword" placeholder="Mot de passe" required>
+              <label for="inputPassword" class="">Mot de passe</label>
+              <input class="form-control" type="text" id="inputPassword" name="inputPassword" placeholder="Mot de passe" required>
             </div>
         </div>
         <div class="modal-footer">
