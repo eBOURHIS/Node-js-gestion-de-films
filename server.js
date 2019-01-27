@@ -12,8 +12,8 @@ const config = require(path.join(__dirname, 'config.js'))
 const FilmSchema = new mongoose.Schema({
   title: { type: String, required: true },
   releasedate: { type: String },
-  realisator: { type: String },
-  gender: { type: String },
+  director: { type: String },
+  genre: { type: String },
   description: { type: String }
 })
 
@@ -157,8 +157,8 @@ router.route('/film/add')
     new Film({
       title: req.body.inputtitle,
       releasedate: req.body.inputDateBegin,
-      realisator: req.body.inputreal,
-      gender: req.body.inputgender,
+      director: req.body.inputreal,
+      genre: req.body.inputgenre,
       description: req.body.inputdesc
     }).save().then(film => {
       console.log('Votre film a été ajoutée')
@@ -171,8 +171,8 @@ router.route('/film/add')
 router.route('/film/edit/:id')
   .get(checkAuthentication, (req, res) => {
     Film.findById({ _id: req.params.id }).then(film => {
-      const { title, releasedate, realisator, gender, description } = film
-      res.render('modifFilm.njk', { id: film._id, title, releasedate, realisator, gender, description })
+      const { title, releasedate, director, genre, description } = film
+      res.render('modifFilm.njk', { id: film._id, title, releasedate, director, genre, description })
     }).catch(err => {
       console.warn(err)
     })

@@ -27,10 +27,10 @@
                       {{ film.releasedate }}
                     </td>
                     <td>
-                      {{ film.realisator }}
+                      {{ film.director }}
                     </td>
                     <td>
-                      {{ film.gender }}
+                      {{ film.genre }}
                     </td>
                     <td>
                       <a class="btn btn-success btn-sm" href="/film/edit/{{ film._id }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
@@ -38,15 +38,14 @@
                     </td>
                   </tr>
                 {% endfor %}
-
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAddFilm">
-              Ajouter un film
-            </button>
            <br>
           </center>
         </blockquote>
       </div>
       </table>
+       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAddFilm">
+              Ajouter un film
+       </button>
     </div>
     </div>
 
@@ -75,7 +74,7 @@
                 </div>
                 <div class="form-group">
                   <label for="inputDateEnd" class="">Genre :</label>
-                  <input type="text" class="form-control" id="inputgender" name="inputgender" placeholder="Aventure" autofocus required>
+                  <input type="text" class="form-control" id="inputgenre" name="inputgenre" placeholder="Aventure" autofocus required>
                 </div>
                 <div class="form-group">
                   <label for="inputDateEnd" class="">Description :</label>
